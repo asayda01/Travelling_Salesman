@@ -2,7 +2,6 @@ import pytest
 import math
 from cities import *
 
-
 def test_compute_total_distance():
     road_map1 = [("Kentucky", "Frankfort", 38.197274, -84.86311),\
                 ("Delaware", "Dover", 39.161921, -75.526755),\
@@ -25,10 +24,7 @@ def test_shift_cities():
     road_map3 = [("Minnesota", "Saint Paul", 38.197274, -84.86311), \
                  ("Kentucky", "Frankfort", 39.161921, -75.526755), \
                  ("Delaware", "Dover", 44.95, -93.094)]
-    x2_x1 = (road_map3[0][2] - road_map3[1][2]) ** 2
-    y2_y1 = (road_map3[0][3] - road_map3[1][3]) ** 2
+    x2_x1 = (road_map3[2][2] - road_map3[1][2]) ** 2
+    y2_y1 = (road_map3[2][3] - road_map3[1][3]) ** 2
     total_distance1 = pytest.approx(math.sqrt(x2_x1 + y2_y1), 0.01)
-    assert total_distance1 == 9.39
-    pass
-
-
+    assert total_distance1 == 18.50
