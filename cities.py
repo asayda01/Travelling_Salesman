@@ -1,112 +1,90 @@
-"""
-state = []
-city = []
-location_x = []
-location_y = []
-list1 = []
-list2 = ()
-for x1 in  list1:
-    for x2 in  list1:
-        state.append(list1[x1][x2])
-        city.append(list1[x1][x2])
-        location_x.append(list1[x1][x2])
-        location_y.append(list1[x1][x2])
-print(state,city,location_x,location_y,end=" ")
-
-"""
+import tkinter as tk
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from time import sleep
+from tkinter import *
+from random import choice
+from math import sqrt
+from random import randint
+import random
+from copy import copy
+import copy
 
 def read_cities(file_name):
-    """
-    with open("city-data.txt", "r") as file1:
-        for line1 in file1:
-            list2 = line1.split()
-            list2 = (list(list2))
-            list1.append(list(list2))
-    """
-    """
-    Read in the cities from the given `file_name`, and return
-    them as a list of four-tuples:
+    file_name1 = open(file_name, "r")
+    list1,list2,list3=[],[],[]
+    for line1 in file_name1:
+        list2 = line1.rstrip().split("\t")
+        list1.append(list2)
+    for i in range(len(list1)):
+        list3.append([list1[i][0], list1[i][1], (((list1[i][2]))), ((list1[i][3]))])
+    return list3
 
-      [(state, city, latitude, longitude), ...]
-
-    Use this as your initial `road_map`, that is, the cycle
-
-      Alabama -> Alaska -> Arizona -> ... -> Wyoming -> Alabama.
-    """
-    pass
-
-"""
-with open("city-data.txt", "r") as file1:
-    for line1 in file1:
-        list2 = line1.split()
-        list2 = (list(list2))
-        list1.append(list(list2))
-location1 = float()
-location2 = float()
-for x1 in range(0,49):
-    location1 = float(list1[x1][2])
-    location2 = float(list1[x1][3])
-    print(location1,location2,end="\t")
-"""
 def print_cities(road_map):
-    for x1 in range(0, 4):
-        for x2 in range(1, 4):
-            print(list1[x1][x2],end="\n")
-    """
-    Prints a list of cities, along with their locations.
-    Print only one or two digits after the decimal point.
-    """
-    pass
+    list4=[]
+    for i in range(0,len(road_map)):
+        list4.append([road_map[i][0],road_map[i][1],(round((float(road_map[i][2])),2)),(round(float(road_map[i][3]),2))])
+    return list4
 
 def compute_total_distance(road_map):
+    total_dist1 = 0.0
+    city_x1,city_y1,city_x2,city_y2=0,0,0,0
+    for i in range(0,len(road_map)):
+        city_x1 = float(road_map[i][2])
+        city_y1 = float(road_map[i][3])
+        city_x2 = float(road_map[(i + 1) % len(road_map)][2])
+        city_y2 = float(road_map[(i + 1) % len(road_map)][3])
+        total_dist1 += sqrt(  ( (city_x2-city_x1)  ** 2)   + (    ( city_y2-city_y1 )  ** 2)   )
+    return (total_dist1)
 
-    """
-    Returns, as a floating point number, the sum of the distances of all
-    the connections in the `road_map`. Remember that it's a cycle, so that
-    (for example) in the initial `road_map`, Wyoming connects to Alabama...
-    """
-    pass
-
-
-def swap_cities(road_map, index1, index2):
-    """
-    Take the city at location `index` in the `road_map`, and the
-    city at location `index2`, swap their positions in the `road_map`,
-    compute the new total distance, and return the tuple
-
-        (new_road_map, new_total_distance)
-
-    Allow for the possibility that `index1=index2`,
-    and handle this case correctly.
-    """
-    pass
+def swap_cities(road_map,index1,index2):
+    new_road_map = copy.deepcopy(road_map)
+    new_value_1 = new_road_map[index1]
+    new_value_2 = new_road_map[index2]
+    new_road_map[index1] = new_value_2
+    new_road_map[index2] = new_value_1
+    new_total_distance = compute_total_distance(new_road_map)
+    return new_road_map,new_total_distance
 
 def shift_cities(road_map):
-    """
-    For every index i in the `road_map`, the city at the position i moves
-    to the position i+1. The city at the last position moves to the position
-    0. Return the new road map.
-    """
-    pass
+    new_shifted_road_map=[road_map[-1]] + road_map[:-1]
+    return new_shifted_road_map
 
 def find_best_cycle(road_map):
-    """
-    Using a combination of `swap_cities` and `shift_cities`,
-    try `10000` swaps/shifts, and each time keep the best cycle found so far.
-    After `10000` swaps/shifts, return the best cycle found so far.
-    Use randomly generated indices for swapping.
-    """
-    pass
+    min_dist = compute_total_distance(road_map)
+    new_best_map = road_map
+    count=0
+    while (count <= 10000):
+        index1 = int(len(new_best_map)* random.random())
+        index2 = int(len(new_best_map)* random.random())
+        new_route1 = (swap_cities(shift_cities(new_best_map), index1, index2)[0])
+        new_dist = (swap_cities(shift_cities(new_best_map), index1, index2)[1])
+        if new_dist < min_dist:
+            min_dist = new_dist
+            new_best_map = new_route1
+        count += 1
+    return new_best_map,min_dist
 
 def print_map(road_map):
-    """
-    Prints, in an easily understandable format, the cities and
-    their connections, along with the cost for each connection
-    and the total cost.
-    """
-    pass
+    road_map_last = find_best_cycle(road_map)[0]
+    total_dist =0
+    list5 = []
+    for i in range(len(road_map_last) - 1):
+        new_city_x3 = float(road_map_last[i][2])
+        new_city_y3 = float(road_map_last[i][3])
+        new_city_x4 = float(road_map_last[(i + 1) % len(road_map_last)][2])
+        new_city_y4 = float(road_map_last[(i + 1) % len(road_map_last)][3])
+        #new_dist1 = sqrt((new_city_x3 - new_city_x4) ** 2 + (new_city_y3 - new_city_y4) ** 2)
+        new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
+        total_dist += new_dist1
+        new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  + " State : " + road_map_last[(i + 1) % len(road_map_last)][0]  + " ) " + " Distance : " + str(round(new_dist1, 2))
+        list5.append(new_line1)
+        list5.append("Total distance : ---> " + str(round(total_dist, 2)))
+    return (list5)
 
 def main():
+
     """
     Reads in, and prints out, the city data, then creates the "best"
     cycle and prints it out.
