@@ -85,10 +85,13 @@ def Visualizer(road_map):
     line_distance = 25
     visualize_1= tkinter.Canvas(root, width=canvas_width, height=canvas_height, bg='white')
     visualize_1.pack(side=LEFT)
+    information_2 =str ((" ---> BEST ROUTE : " +" From City : "  + str(best_route_2[0][1]) + " ( State : "+ str(best_route_2[0][0]) + " ) to City : " + str(best_route_2[-1][1]) + " ( State : " + str(best_route_2[-1][0]) +" ) " + "\t" +" ---> MINIMUM DISTANCE : " + str(round(minDistance, 2))))
+    button1=Button(text= information_2)
+    button1.pack()
+    root.title(" --- --- --- The Traveling Salesman --- --- --- ")
+
 
     tkinter.mainloop()
-
-
 
 def main():
     file_name = "city-data.txt"
@@ -112,9 +115,8 @@ def main():
     #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
     # print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
     best_route_1 = find_best_cycle(road_map)
-    print(best_route_1)
-    #print("--------------------------------------------------------------------------------------------------------------------------------------")
     Visualizer(best_route_1)
+    #print("--------------------------------------------------------------------------------------------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if __name__ == "__main__": #keep this in
