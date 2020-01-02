@@ -78,6 +78,18 @@ def print_map(road_map):
         list5.append("Total distance : ---> " + str(round(total_dist, 2)))
     print(*list5,sep="\n")
 
+def Visualizer(road_map):
+    root = tkinter.Tk()
+    canvas_width = 1250
+    canvas_height = 625
+    line_distance = 25
+    visualize_1= tkinter.Canvas(root, width=canvas_width, height=canvas_height, bg='white')
+    visualize_1.pack(side=LEFT)
+
+    tkinter.mainloop()
+
+
+
 def main():
     file_name = "city-data.txt"
     #print("-------------------file-name-yazdik------------------------------------------------------------------")
@@ -99,8 +111,10 @@ def main():
     print_map(road_map)
     #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
     # print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
-    # visualise still in progressssssssssssssssssssssssssssssssssssssssssssssssss
+    best_route_1 = find_best_cycle(road_map)
+    print(best_route_1)
     #print("--------------------------------------------------------------------------------------------------------------------------------------")
+    Visualizer(best_route_1)
     print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if __name__ == "__main__": #keep this in
