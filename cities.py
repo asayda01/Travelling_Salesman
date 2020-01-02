@@ -1,14 +1,10 @@
-import tkinter as tk
-from pandas import DataFrame
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from time import sleep
+import tkinter
 from tkinter import *
+import numpy as np
+import math
+import random
 from random import choice
 from math import sqrt
-from random import randint
-import random
-from copy import copy
 import copy
 
 def read_cities(file_name):
@@ -63,19 +59,19 @@ def find_best_cycle(road_map):
             min_dist = new_dist
             new_best_map = new_route1
         count += 1
-    return new_best_map,min_dist
+    return new_best_map
 
 def print_map(road_map):
     road_map_last = road_map
     total_dist =0
     list5 = []
-    for i in range(0,len(road_map_last) - 1):
+    for i in range(0,len(road_map_last)):
         new_city_x3 = float(road_map_last[i][2])
         new_city_y3 = float(road_map_last[i][3])
         new_city_x4 = float(road_map_last[(i + 1) % len(road_map_last)][2])
         new_city_y4 = float(road_map_last[(i + 1) % len(road_map_last)][3])
-        #new_dist1 = sqrt((new_city_x3 - new_city_x4) ** 2 + (new_city_y3 - new_city_y4) ** 2)
-        new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
+        new_dist1 = sqrt((new_city_x3 - new_city_x4) ** 2 + (new_city_y3 - new_city_y4) ** 2)
+        #new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
         total_dist += new_dist1
         new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  + " State : " + road_map_last[(i + 1) % len(road_map_last)][0]  + " ) " + " Distance : " + str(round(new_dist1, 2))
         list5.append(new_line1)
@@ -87,7 +83,7 @@ def main():
     #print("-------------------file-name-yazdik------------------------------------------------------------------")
     road_map= read_cities(file_name)
     #print("----------read-cities-(file_name)-yazdik--------------------------------------------------------------------------")
-    print_cities(road_map)
+    #print_cities(road_map)
     #print("--------------print_cities(road_map)---fonksyionunu-cagirdik---------------------------------------------------------------------")
     print(compute_total_distance(road_map))
     #print("----------------print---compute_total_distance(road_map)------------------------------------------------------------------")
@@ -102,13 +98,10 @@ def main():
     #print("-----------print-shift-cities--------------------------------------------------------------------------------------------------")
     print_map(road_map)
     #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
+    # print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
+    # visualise still in progressssssssssssssssssssssssssssssssssssssssssssssssss
     #print("--------------------------------------------------------------------------------------------------------------------------------------")
-    print("--------------------------------------------------------------------------------------------------------------------------------------")
-
-"""
-    Reads in, and prints out, the city data, then creates the "best"
-    cycle and prints it out.
-"""
+    print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if __name__ == "__main__": #keep this in
     main()
