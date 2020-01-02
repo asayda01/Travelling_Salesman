@@ -66,7 +66,7 @@ def find_best_cycle(road_map):
     return new_best_map,min_dist
 
 def print_map(road_map):
-    road_map_last = find_best_cycle(road_map)[0]
+    road_map_last = road_map
     total_dist =0
     list5 = []
     for i in range(0,len(road_map_last) - 1):
