@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import *
+from tkinter import messagebox
 import numpy as np
 import math
 import random
@@ -73,7 +74,10 @@ def print_map(road_map):
         new_dist1 = sqrt((new_city_x3 - new_city_x4) ** 2 + (new_city_y3 - new_city_y4) ** 2)
         #new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
         total_dist += new_dist1
-        new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  + " State : " + road_map_last[(i + 1) % len(road_map_last)][0]  + " ) " + " Distance : " + str(round(new_dist1, 2))
+        new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] \
+                    + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  \
+                    + " State : " + road_map_last[(i + 1) % len(road_map_last)][0]  + " ) " \
+                    + " Distance : " + str(round(new_dist1, 2))
         list5.append(new_line1)
         list5.append("Total distance : ---> " + str(round(total_dist, 2)))
     print(*list5,sep="\n")
@@ -84,12 +88,57 @@ def Visualizer(road_map):
     canvas_height = 625
     line_distance = 25
     visualize_1= tkinter.Canvas(root, width=canvas_width, height=canvas_height, bg='white')
+    root.title(" The Traveling Salesman ")
     visualize_1.pack(side=LEFT)
-    information_2 =str ((" ---> BEST ROUTE : " +" From City : "  + str(best_route_2[0][1]) + " ( State : "+ str(best_route_2[0][0]) + " ) to City : " + str(best_route_2[-1][1]) + " ( State : " + str(best_route_2[-1][0]) +" ) " + "\t" +" ---> MINIMUM DISTANCE : " + str(round(minDistance, 2))))
-    button1=Button(text= information_2)
-    button1.pack()
-    root.title(" --- --- --- The Traveling Salesman --- --- --- ")
 
+    exe_1 = Frame(root)
+    exe_1.pack()
+
+    best_route_2 = road_map
+    minDistance = compute_total_distance(best_route_2)
+
+    def dialog ():
+        messagebox.showinfo(" Best Ciycle ",information_2 )
+    information_2 = str(("Best Route : " + " From City : " + str(best_route_2[0][1]) + " ( State : " \
+                         + str(best_route_2[0][0]) + " ) to City : " + str(best_route_2[-1][1]) + " ( State : " \
+                         + str(best_route_2[-1][0]) + " ) " + " Minimum Distance : " + str(round(minDistance, 2))))
+    button1 = Button(exe_1, text=" ---> Best Cycle <--- ", fg="white", bg="lightblue", command=dialog)
+    button1.pack()
+
+    for x in range(line_distance, canvas_width + line_distance, line_distance):
+        visualize_1.create_line(x, line_distance, x, canvas_height, fill="blue", dash=())
+    for y in range(line_distance, canvas_height + line_distance, line_distance):
+        visualize_1.create_line(line_distance, y, canvas_width, y, fill="red", dash=())
+
+    maximum_Longtt, minumum_Longtt = np.max([float(i[3]) for i in best_route_2]),\
+                                     np.min([float(i[3]) for i in best_route_2])
+    maximum_Latt, minumum_Latt = np.max([float(i[2]) for i in best_route_2]),\
+                                 np.min([float(i[2]) for i in best_route_2])
+    Longtt_Range = np.append([0], np.linspace(math.floor(minumum_Longtt),
+                                              math.ceil(maximum_Longtt), int(canvas_width / line_distance) - 2))
+    Latt_Range = np.append([0], np.flip(np.linspace(math.floor(minumum_Latt),
+                                                    math.ceil(maximum_Latt), int(canvas_height / line_distance) - 2)))
+
+    for x in range(line_distance, canvas_width - line_distance, line_distance):
+        visualize_1.create_text(x + line_distance, line_distance, text=round((Longtt_Range[int(x / line_distance)]), 2),
+                      angle=90, font=("Times", 8), fill='black')
+    for y in range(line_distance, canvas_height - line_distance, line_distance):
+        visualize_1.create_text(line_distance, y + line_distance, text=round((Latt_Range[int(y / line_distance)]), 2),
+                      font=("Times", 8), fill='black')
+
+    count = 0
+    for i in best_route_2:
+        count += 1
+        differeance_Longtt = line_distance / abs(Longtt_Range[6] - Longtt_Range[5])
+        inter_Longtt = differeance_Longtt * ((float(i[3])) - math.floor(minumum_Longtt))
+        differeance_Latt = line_distance / abs(Latt_Range[6] - Latt_Range[5])
+        inter_Latt = differeance_Latt * (math.ceil(maximum_Latt) - float(i[2]))
+        my_color = "#" + "".join((choice(['0', '1', '2', '3', '4', '5', '6', '7', '8']) for _ in range(0, 9)))
+        visualize_1.create_oval(inter_Longtt + 30, inter_Latt + 30, inter_Longtt + 50,
+                                inter_Latt + 50, fill=my_color, outline=my_color)
+        visualize_1.create_text(inter_Longtt + 40, inter_Latt + 40, text=str(count), font=("Times", 9), fill='white')
+        information_1=Label(text=(str(count),str(i[1]),str(i[0])),font=("Times", 8))
+        information_1.pack(side=TOP)
 
     tkinter.mainloop()
 
@@ -111,10 +160,10 @@ def main():
     #print(*shift_cities(road_map),sep="\n")
     shift_cities(road_map)
     #print("-----------print-shift-cities--------------------------------------------------------------------------------------------------")
-    print_map(road_map)
+    #print_map(road_map)
     #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
-    # print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
     best_route_1 = find_best_cycle(road_map)
+    # print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
     Visualizer(best_route_1)
     #print("--------------------------------------------------------------------------------------------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
