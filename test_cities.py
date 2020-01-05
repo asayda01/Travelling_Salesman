@@ -6,26 +6,26 @@ def test_compute_total_distance():
 
     #test - 1
 
-    road_map1 = [('Kentucky', 'Frankfort', '38.197274', '-84.86311'),
+    road_map_comp_dist_1 = [('Kentucky', 'Frankfort', '38.197274', '-84.86311'),
                  ('Delaware', 'Dover', '39.161921', '-75.526755')]
 
-    assert isinstance(compute_total_distance(road_map1), float)
+    assert isinstance(compute_total_distance(road_map_comp_dist_1), float)
 
     #test - 2
 
     total_dist2 = 0.0
-    for i in range(0, len(road_map1)):
-        city_x1 = float(road_map1[i][2])
-        city_y1 = float(road_map1[i][3])
-        city_x2 = float(road_map1[(i + 1) % len(road_map1)][2])
-        city_y2 = float(road_map1[(i + 1) % len(road_map1)][3])
+    for i in range(0, len(road_map_comp_dist_1)):
+        city_x1 = float(road_map_comp_dist_1[i][2])
+        city_y1 = float(road_map_comp_dist_1[i][3])
+        city_x2 = float(road_map_comp_dist_1[(i + 1) % len(road_map_comp_dist_1)][2])
+        city_y2 = float(road_map_comp_dist_1[(i + 1) % len(road_map_comp_dist_1)][3])
         total_dist2 += sqrt(((city_x2 - city_x1) ** 2) + ((city_y2 - city_y1) ** 2))
 
-    assert (total_dist2 == compute_total_distance(road_map1))
+    assert (total_dist2 == compute_total_distance(road_map_comp_dist_1))
 
     #test - 3
 
-    road_map3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
+    road_map_comp_dist_3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
                  ['Georgia', 'Atlanta', '33.76', '-84.39'],
                  ['Hawaii', 'Honolulu', '21.30895', '-157.826182'],
                  ['Idaho', 'Boise', '43.613739', '-116.237651'],
@@ -40,18 +40,18 @@ def test_compute_total_distance():
                  ['Massachusetts', 'Boston', '42.2352', '-71.0275']]
 
     total_dist3 = 0.0
-    for i in range(0, len(road_map3)):
-        city_x1 = float(road_map3[i][2])
-        city_y1 = float(road_map3[i][3])
-        city_x2 = float(road_map3[(i + 1) % len(road_map3)][2])
-        city_y2 = float(road_map3[(i + 1) % len(road_map3)][3])
+    for i in range(0, len(road_map_comp_dist_3)):
+        city_x1 = float(road_map_comp_dist_3[i][2])
+        city_y1 = float(road_map_comp_dist_3[i][3])
+        city_x2 = float(road_map_comp_dist_3[(i + 1) % len(road_map_comp_dist_3)][2])
+        city_y2 = float(road_map_comp_dist_3[(i + 1) % len(road_map_comp_dist_3)][3])
         total_dist3 += sqrt(((city_x2 - city_x1) ** 2) + ((city_y2 - city_y1) ** 2))
 
-    assert (total_dist3 == compute_total_distance(road_map3))
+    assert (total_dist3 == compute_total_distance(road_map_comp_dist_3))
 
     #test - 4
 
-    road_map4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
+    road_map_comp_dist_4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
                  ['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
                  ['Nevada', 'Carson City', '39.160949', '-119.753877'],
                  ['New Hampshire', 'Concord', '43.220093', '-71.549127'],
@@ -74,19 +74,19 @@ def test_compute_total_distance():
                  ['Virginia', 'Richmond', '37.54', '-77.46']]
 
     total_dist4 = 0.0
-    for i in range(0, len(road_map4)):
-        city_x1 = float(road_map4[i][2])
-        city_y1 = float(road_map4[i][3])
-        city_x2 = float(road_map4[(i + 1) % len(road_map4)][2])
-        city_y2 = float(road_map4[(i + 1) % len(road_map4)][3])
+    for i in range(0, len(road_map_comp_dist_4)):
+        city_x1 = float(road_map_comp_dist_4[i][2])
+        city_y1 = float(road_map_comp_dist_4[i][3])
+        city_x2 = float(road_map_comp_dist_4[(i + 1) % len(road_map_comp_dist_4)][2])
+        city_y2 = float(road_map_comp_dist_4[(i + 1) % len(road_map_comp_dist_4)][3])
         total_dist4 += sqrt(((city_x2 - city_x1) ** 2) + ((city_y2 - city_y1) ** 2))
 
-    assert (total_dist4 == compute_total_distance(road_map4))
+    assert (total_dist4 == compute_total_distance(road_map_comp_dist_4))
 
 
     # test - 5
 
-    road_map5 = [['Alabama', 'Montgomery', '32.361538', '-86.279118'],
+    road_map_comp_dist_5 = [['Alabama', 'Montgomery', '32.361538', '-86.279118'],
                  ['Alaska', 'Juneau', '58.301935', '-134.41974'],
                  ['Arizona', 'Phoenix', '33.448457', '-112.073844'],
                  ['Arkansas', 'Little Rock', '34.736009', '-92.331122'],
@@ -138,14 +138,15 @@ def test_compute_total_distance():
                  ['Wyoming', 'Cheyenne', '41.145548', '-104.802042']]
 
     total_dist5 = 0.0
-    for i in range(0, len(road_map5)):
-        city_x1 = float(road_map5[i][2])
-        city_y1 = float(road_map5[i][3])
-        city_x2 = float(road_map5[(i + 1) % len(road_map5)][2])
-        city_y2 = float(road_map5[(i + 1) % len(road_map5)][3])
+    for i in range(0, len(road_map_comp_dist_5)):
+        city_x1 = float(road_map_comp_dist_5[i][2])
+        city_y1 = float(road_map_comp_dist_5[i][3])
+        city_x2 = float(road_map_comp_dist_5[(i + 1) % len(road_map_comp_dist_5)][2])
+        city_y2 = float(road_map_comp_dist_5[(i + 1) % len(road_map_comp_dist_5)][3])
         total_dist5 += sqrt(((city_x2 - city_x1) ** 2) + ((city_y2 - city_y1) ** 2))
 
-    assert (total_dist5 == compute_total_distance(road_map5))
+    assert (total_dist5 == compute_total_distance(road_map_comp_dist_5))
+
 
 
 def test_swap_cities():
@@ -178,9 +179,6 @@ def test_swap_cities():
                                                      ['New Jersey', 'Trenton', '40.221741', '-74.756138'],
                                                      ['North Carolina', 'Raleigh', '35.771', '-78.638']],162.921023302501)
 
-
-
-
     # test - 3
 
     road_map_swap_3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
@@ -211,7 +209,6 @@ def test_swap_cities():
                  ['Maryland', 'Annapolis', '38.972945', '-76.501157'],
                  ['Massachusetts', 'Boston', '42.2352', '-71.0275']],266.9761645698053)
 
-
     # test - 4
 
     road_map_swap_4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
@@ -235,6 +232,7 @@ def test_swap_cities():
                  ['Utah', 'Salt Lake City', '40.7547', '-111.892622'],
                  ['Vermont', 'Montpelier', '44.26639', '-72.57194'],
                  ['Virginia', 'Richmond', '37.54', '-77.46']]
+    
     assert (swap_cities(road_map_swap_4, 1, 19)) == ([['Montana', 'Helana', '46.595805', '-112.027031'],
                                                       ['Vermont', 'Montpelier', '44.26639', '-72.57194'],
                  ['Nevada', 'Carson City', '39.160949', '-119.753877'],
@@ -361,8 +359,7 @@ def test_swap_cities():
                                                       ['Wisconsin', 'Madison', '43.074722', '-89.384444'],
                                                       ['Wyoming', 'Cheyenne', '41.145548', '-104.802042']],
                                                      1059.0139332789988)
-
-# def test_shift_cities():
+    # def test_shift_cities():
 #     road_map3 = [("Minnesota", "Saint Paul", 38.197274, -84.86311), \
 #                  ("Kentucky", "Frankfort", 39.161921, -75.526755), \
 #                  ("Delaware", "Dover", 44.95, -93.094)]
@@ -374,4 +371,3 @@ def test_swap_cities():
 #     total_distance5 = pytest.approx(math.sqrt(x4_x3 + y4_y3), 0.01)
 #
 #     assert (total_distance4 == 18.50)  and (total_distance5 == 9.39)
-
