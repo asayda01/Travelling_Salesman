@@ -95,10 +95,10 @@ def print_map(road_map):
 
 def Visualizer(road_map):
     root = tkinter.Tk()
-    canvas_width = 1250
-    canvas_height = 625
-    line_distance = 25
-    visualize_1= tkinter.Canvas(root, width=canvas_width, height=canvas_height, bg='white')
+    canvas_x_axis = 1250
+    canvas_y_axis = 625
+    grid_distance = 25
+    visualize_1= tkinter.Canvas(root, width=canvas_x_axis, height=canvas_y_axis, bg='white')
     root.title(" The Traveling Salesman ")
     visualize_1.pack(side=LEFT)
 
@@ -116,33 +116,33 @@ def Visualizer(road_map):
     button1 = Button(exe_1, text=" ---> Best Cycle <--- ", fg="white", bg="lightblue", command=dialog)
     button1.pack()
 
-    for x in range(line_distance, canvas_width + line_distance, line_distance):
-        visualize_1.create_line(x, line_distance, x, canvas_height, fill="blue", dash=())
-    for y in range(line_distance, canvas_height + line_distance, line_distance):
-        visualize_1.create_line(line_distance, y, canvas_width, y, fill="red", dash=())
+    for x in range(grid_distance, canvas_x_axis + grid_distance, grid_distance):
+        visualize_1.create_line(x, grid_distance, x, canvas_y_axis, fill="blue", dash=())
+    for y in range(grid_distance, canvas_y_axis + grid_distance, grid_distance):
+        visualize_1.create_line(grid_distance, y, canvas_x_axis, y, fill="red", dash=())
 
-    maximum_Longtt, minumum_Longtt = np.max([float(i[3]) for i in best_route_2]),\
-                                     np.min([float(i[3]) for i in best_route_2])
-    maximum_Latt, minumum_Latt = np.max([float(i[2]) for i in best_route_2]),\
-                                 np.min([float(i[2]) for i in best_route_2])
+    maximum_Longtt = np.max([float(i[3]) for i in best_route_2])
+    minumum_Longtt  = np.min([float(i[3]) for i in best_route_2])
+    maximum_Latt = np.max([float(i[2]) for i in best_route_2])
+    minumum_Latt = np.min([float(i[2]) for i in best_route_2])
     Longtt_Range = np.append([0], np.linspace(math.floor(minumum_Longtt),
-                                              math.ceil(maximum_Longtt), int(canvas_width / line_distance) - 2))
+                                              math.ceil(maximum_Longtt), int(canvas_x_axis / grid_distance) - 2))
     Latt_Range = np.append([0], np.flip(np.linspace(math.floor(minumum_Latt),
-                                                    math.ceil(maximum_Latt), int(canvas_height / line_distance) - 2)))
+                                                    math.ceil(maximum_Latt), int(canvas_y_axis / grid_distance) - 2)))
 
-    for x in range(line_distance, canvas_width - line_distance, line_distance):
-        visualize_1.create_text(x + line_distance, line_distance, text=round((Longtt_Range[int(x / line_distance)]), 2),
+    for x in range(grid_distance, canvas_x_axis - grid_distance, grid_distance):
+        visualize_1.create_text(x + grid_distance, grid_distance, text=round((Longtt_Range[int(x / grid_distance)]), 2),
                       angle=90, font=("Lucida Console", 9), fill='black')
-    for y in range(line_distance, canvas_height - line_distance, line_distance):
-        visualize_1.create_text(line_distance, y + line_distance, text=round((Latt_Range[int(y / line_distance)]), 2),
+    for y in range(grid_distance, canvas_y_axis - grid_distance, grid_distance):
+        visualize_1.create_text(grid_distance, y + grid_distance, text=round((Latt_Range[int(y / grid_distance)]), 2),
                       font=("Lucida Console", 9), fill='black')
 
     count = 0
     for i in best_route_2:
         count += 1
-        differeance_Longtt = line_distance / abs(Longtt_Range[6] - Longtt_Range[5])
+        differeance_Longtt = grid_distance / abs(Longtt_Range[2] - Longtt_Range[1])
         inter_Longtt = differeance_Longtt * ((float(i[3])) - math.floor(minumum_Longtt))
-        differeance_Latt = line_distance / abs(Latt_Range[6] - Latt_Range[5])
+        differeance_Latt = grid_distance / abs(Latt_Range[2] - Latt_Range[1])
         inter_Latt = differeance_Latt * (math.ceil(maximum_Latt) - float(i[2]))
         my_color = "#" + "".join((choice(['0', '1', '2', '3', '4', '5', '6', '7', '8']) for _ in range(0, 9)))
         visualize_1.create_oval(inter_Longtt + 30, inter_Latt + 30, inter_Longtt + 50,
