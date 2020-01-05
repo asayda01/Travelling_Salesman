@@ -21,7 +21,8 @@ def read_cities(file_name):
 def print_cities(road_map):
     list4=[]
     for i in range(0,len(road_map)):
-        list4.append([road_map[i][0],road_map[i][1],(round((float(road_map[i][2])),2)),(round(float(road_map[i][3]),2))])
+        list4.append([road_map[i][0],road_map[i][1],(round((float(road_map[i][2])),2)),
+                      (round(float(road_map[i][3]),2))])
     print(*list4,sep="\n")
 
 def compute_total_distance(road_map):
@@ -36,7 +37,6 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map,index1,index2):
     new_road_map = copy.deepcopy(road_map)
-
     if (index1!= index2):
         new_value_1 = new_road_map[index1]
         new_value_2 = new_road_map[index2]
@@ -46,8 +46,9 @@ def swap_cities(road_map,index1,index2):
     else:
         index1 = int(len(new_road_map) * random.random())
         index2 = int(len(new_road_map) * random.random())
-        new_road_map,new_total_distance = (swap_cities(new_road_map, index1, index2)[0]),(swap_cities(new_road_map, index1, index2)[1])
-    return (new_road_map,new_total_distance,index1,index2)
+        new_road_map,new_total_distance = (swap_cities(new_road_map, index1, index2)[0]),\
+                                          (swap_cities(new_road_map, index1, index2)[1])
+    return (new_road_map,new_total_distance)
 
 def shift_cities(road_map):
     new_shifted_road_map=[road_map[-1]] + road_map[:-1]
@@ -77,7 +78,8 @@ def print_map(road_map):
         new_city_y3 = float(road_map_last[i][3])
         new_city_x4 = float(road_map_last[(i + 1) % len(road_map_last)][2])
         new_city_y4 = float(road_map_last[(i + 1) % len(road_map_last)][3])
-        new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
+        new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],
+                                              [str(),str(),new_city_x4,new_city_y4]]))/2)
         total_dist += new_dist1
         new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] \
                     + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  \
@@ -141,7 +143,8 @@ def Visualizer(road_map):
         my_color = "#" + "".join((choice(['0', '1', '2', '3', '4', '5', '6', '7', '8']) for _ in range(0, 9)))
         visualize_1.create_oval(inter_Longtt + 30, inter_Latt + 30, inter_Longtt + 50,
                                 inter_Latt + 50, fill=my_color, outline=my_color)
-        visualize_1.create_text(inter_Longtt + 40, inter_Latt + 40, text=str(count), font=("Lucida Console", 9), fill='white')
+        visualize_1.create_text(inter_Longtt + 40, inter_Latt + 40, text=str(count),
+                                font=("Lucida Console", 9), fill='white')
         information_1=Label(text=(str(count),str(i[1]),str(i[0])),font=("Lucida Console", 9))
         information_1.pack(side=TOP)
 
@@ -150,7 +153,6 @@ def Visualizer(road_map):
 def main():
     file_name = input("Please type a file name that contains the data (for example type :city-data) :")
     road_map= read_cities(("%s.txt" % (file_name)))
-    #road_map = read_cities("city-data.txt")
     print_cities(road_map)
     compute_total_distance(road_map)
     index1,index2 = int(len(road_map) * random.random()),int(len(road_map) * random.random())
