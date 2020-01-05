@@ -1,3 +1,7 @@
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+
 import tkinter
 from tkinter import *
 from tkinter import messagebox
@@ -164,3 +168,7 @@ def main():
 
 if __name__ == "__main__": #keep this in
     main()
+
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
