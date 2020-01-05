@@ -4,14 +4,12 @@ from cities import *
 
 def test_compute_total_distance():
 
-    #test - 1
-
+    # --- test - 1 ---
     road_map_comp_dist_1 = [('Kentucky', 'Frankfort', '38.197274', '-84.86311'),
                  ('Delaware', 'Dover', '39.161921', '-75.526755')]
-
     assert isinstance(compute_total_distance(road_map_comp_dist_1), float)
 
-    #test - 2
+    # --- test - 2 ---
 
     total_dist2 = 0.0
     for i in range(0, len(road_map_comp_dist_1)):
@@ -23,7 +21,7 @@ def test_compute_total_distance():
 
     assert (total_dist2 == compute_total_distance(road_map_comp_dist_1))
 
-    #test - 3
+    # --- test - 3 ---
 
     road_map_comp_dist_3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
                  ['Georgia', 'Atlanta', '33.76', '-84.39'],
@@ -38,7 +36,6 @@ def test_compute_total_distance():
                  ['Maine', 'Augusta', '44.323535', '-69.765261'],
                  ['Maryland', 'Annapolis', '38.972945', '-76.501157'],
                  ['Massachusetts', 'Boston', '42.2352', '-71.0275']]
-
     total_dist3 = 0.0
     for i in range(0, len(road_map_comp_dist_3)):
         city_x1 = float(road_map_comp_dist_3[i][2])
@@ -49,7 +46,7 @@ def test_compute_total_distance():
 
     assert (total_dist3 == compute_total_distance(road_map_comp_dist_3))
 
-    #test - 4
+    # --- test - 4 ---
 
     road_map_comp_dist_4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
                  ['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
@@ -72,7 +69,6 @@ def test_compute_total_distance():
                  ['Utah', 'Salt Lake City', '40.7547', '-111.892622'],
                  ['Vermont', 'Montpelier', '44.26639', '-72.57194'],
                  ['Virginia', 'Richmond', '37.54', '-77.46']]
-
     total_dist4 = 0.0
     for i in range(0, len(road_map_comp_dist_4)):
         city_x1 = float(road_map_comp_dist_4[i][2])
@@ -84,7 +80,7 @@ def test_compute_total_distance():
     assert (total_dist4 == compute_total_distance(road_map_comp_dist_4))
 
 
-    # test - 5
+    #  --- test - 5 ---
 
     road_map_comp_dist_5 = [['Alabama', 'Montgomery', '32.361538', '-86.279118'],
                  ['Alaska', 'Juneau', '58.301935', '-134.41974'],
@@ -136,7 +132,6 @@ def test_compute_total_distance():
                  ['West Virginia', 'Charleston', '38.349497', '-81.633294'],
                  ['Wisconsin', 'Madison', '43.074722', '-89.384444'],
                  ['Wyoming', 'Cheyenne', '41.145548', '-104.802042']]
-
     total_dist5 = 0.0
     for i in range(0, len(road_map_comp_dist_5)):
         city_x1 = float(road_map_comp_dist_5[i][2])
@@ -151,17 +146,17 @@ def test_compute_total_distance():
 
 def test_swap_cities():
 
-    # test - 1
-
+    #  --- test - 1 ---
     road_map_swap_1 = [['California', 'Sacramento', '38.555605', '-121.468926'],
                  ['Colorado', 'Denver', '39.7391667', '-104.984167'],
                  ['Connecticut', 'Hartford', '41.767', '-72.677']]
 
     assert (swap_cities(road_map_swap_1, 1, 2)) == ([['California', 'Sacramento', '38.555605', '-121.468926'],
                                             ['Connecticut', 'Hartford', '41.767', '-72.677'],
-                                            ['Colorado', 'Denver', '39.7391667', '-104.984167']],compute_total_distance(road_map_swap_1))
+                                            ['Colorado', 'Denver', '39.7391667', '-104.984167']],
+                                                    compute_total_distance(road_map_swap_1))
 
-    # test - 2
+    #  --- test - 2 ---
 
     road_map_swap_2 = [['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
                        ['Nevada', 'Carson City', '39.160949', '-119.753877'],
@@ -177,9 +172,10 @@ def test_swap_cities():
                                                      ['New York', 'Albany', '42.659829', '-73.781339'],
                                                      ['New Mexico', 'Santa Fe', '35.667231', '-105.964575'],
                                                      ['New Jersey', 'Trenton', '40.221741', '-74.756138'],
-                                                     ['North Carolina', 'Raleigh', '35.771', '-78.638']],162.921023302501)
+                                                     ['North Carolina', 'Raleigh', '35.771', '-78.638']],
+                                                    162.921023302501)
 
-    # test - 3
+    #  --- test - 3 ---
 
     road_map_swap_3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
                  ['Georgia', 'Atlanta', '33.76', '-84.39'],
@@ -209,7 +205,7 @@ def test_swap_cities():
                  ['Maryland', 'Annapolis', '38.972945', '-76.501157'],
                  ['Massachusetts', 'Boston', '42.2352', '-71.0275']],266.9761645698053)
 
-    # test - 4
+    #  --- test - 4 ---
 
     road_map_swap_4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
                  ['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
@@ -253,9 +249,10 @@ def test_swap_cities():
                  ['Texas', 'Austin', '30.266667', '-97.75'],
                  ['Utah', 'Salt Lake City', '40.7547', '-111.892622'],
                                                       ['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
-                                                      ['Virginia', 'Richmond', '37.54', '-77.46']],503.30894852173606)
+                                                      ['Virginia', 'Richmond', '37.54', '-77.46']],
+                                                     503.30894852173606)
 
-    # test - 5
+    #  --- test - 5 ---
 
     road_map_swap_5 = [['Alabama', 'Montgomery', '32.361538', '-86.279118'],
                  ['Alaska', 'Juneau', '58.301935', '-134.41974'],
@@ -362,7 +359,7 @@ def test_swap_cities():
 
 def test_shift_cities():
 
-    # test - 1
+    #  --- test - 1 ---
 
     road_map_shift_1 = [['California', 'Sacramento', '38.555605', '-121.468926'],
                        ['Colorado', 'Denver', '39.7391667', '-104.984167'],
@@ -372,7 +369,7 @@ def test_shift_cities():
                                                 ['California', 'Sacramento', '38.555605', '-121.468926'],
                                                 ['Colorado', 'Denver', '39.7391667', '-104.984167']]
 
-    # test - 2
+    # ---  test - 2 ---
 
     road_map_shift_2 = [['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
                        ['Nevada', 'Carson City', '39.160949', '-119.753877'],
@@ -390,7 +387,7 @@ def test_shift_cities():
                        ['New Mexico', 'Santa Fe', '35.667231', '-105.964575'],
                        ['New York', 'Albany', '42.659829', '-73.781339']]
 
-    # test - 3
+    #  --- test - 3 ---
 
     road_map_shift_3 = [['Florida', 'Tallahassee', '30.4518', '-84.27277'],
                        ['Georgia', 'Atlanta', '33.76', '-84.39'],
@@ -420,7 +417,7 @@ def test_shift_cities():
                        ['Maine', 'Augusta', '44.323535', '-69.765261'],
                        ['Maryland', 'Annapolis', '38.972945', '-76.501157']]
 
-    # test - 4
+    # ---  test - 4 ---
 
     road_map_shift_4 = [['Montana', 'Helana', '46.595805', '-112.027031'],
                        ['Nebraska', 'Lincoln', '40.809868', '-96.675345'],
@@ -466,7 +463,7 @@ def test_shift_cities():
                        ['Utah', 'Salt Lake City', '40.7547', '-111.892622'],
                        ['Vermont', 'Montpelier', '44.26639', '-72.57194']]
 
-    # test - 5
+    #  --- test - 5 ---
 
     road_map_shift_5 = [['Alabama', 'Montgomery', '32.361538', '-86.279118'],
                        ['Alaska', 'Juneau', '58.301935', '-134.41974'],
