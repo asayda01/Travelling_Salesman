@@ -1,3 +1,7 @@
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+
 import pytest
 import math
 from cities import *
@@ -566,3 +570,7 @@ def test_shift_cities():
                        ['Washington', 'Olympia', '47.042418', '-122.893077'],
                        ['West Virginia', 'Charleston', '38.349497', '-81.633294'],
                        ['Wisconsin', 'Madison', '43.074722', '-89.384444']]
+
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
+# ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
