@@ -36,12 +36,18 @@ def compute_total_distance(road_map):
 
 def swap_cities(road_map,index1,index2):
     new_road_map = copy.deepcopy(road_map)
-    new_value_1 = new_road_map[index1]
-    new_value_2 = new_road_map[index2]
-    new_road_map[index1] = new_value_2
-    new_road_map[index2] = new_value_1
-    new_total_distance = compute_total_distance(new_road_map)
-    return (new_road_map,new_total_distance)
+
+    if (index1!= index2):
+        new_value_1 = new_road_map[index1]
+        new_value_2 = new_road_map[index2]
+        new_road_map[index1] = new_value_2
+        new_road_map[index2] = new_value_1
+        new_total_distance = compute_total_distance(new_road_map)
+    else:
+        index1 = int(len(new_road_map) * random.random())
+        index2 = int(len(new_road_map) * random.random())
+        new_road_map,new_total_distance = (swap_cities(new_road_map, index1, index2)[0]),(swap_cities(new_road_map, index1, index2)[1])
+    return (new_road_map,new_total_distance,index1,index2)
 
 def shift_cities(road_map):
     new_shifted_road_map=[road_map[-1]] + road_map[:-1]
@@ -143,30 +149,33 @@ def Visualizer(road_map):
     tkinter.mainloop()
 
 def main():
-    file_name = input("Please type a file name that contains any data (for example type :city-data) :")
-    print("-------------------file-name-yazdik------------------------------------------------------------------")
-    road_map= read_cities(("%s.txt" % (file_name)))
-    print("----------read-cities-(file_name)-yazdik--------------------------------------------------------------------------")
-    print_cities(road_map)
-    print("--------------print_cities(road_map)---fonksyionunu-cagirdik---------------------------------------------------------------------")
+    #file_name = input("Please type a file name that contains any data (for example type :city-data) :")
+    file_name = "city-data.txt"
+    #print("-------------------file-name-yazdik------------------------------------------------------------------")
+    #road_map= read_cities(("%s.txt" % (file_name)))
+    road_map = read_cities(file_name)
+    #print(*road_map,sep="\n")
+    #print("----------read-cities-(file_name)-yazdik--------------------------------------------------------------------------")
+    #print_cities(road_map)
+    #print("--------------print_cities(road_map)---fonksyionunu-cagirdik---------------------------------------------------------------------")
     print(compute_total_distance(road_map))
-    print("----------------print---compute_total_distance(road_map)------------------------------------------------------------------")
-    index1 = int(len(road_map) * random.random())
-    index2 = int(len(road_map) * random.random())
-    print("-------------------index-1-2-yazdik-----------------------------------------------------------------")
-    swap_cities(road_map, index1, index2)
-    print(swap_cities(road_map, index1, index2))
+    #print("----------------print---compute_total_distance(road_map)------------------------------------------------------------------")
+    #index1 = int(len(road_map) * random.random())
+    #index2 = int(len(road_map) * random.random())
+    #print("-------------------index-1-2-yazdik-----------------------------------------------------------------")
+    #swap_cities(road_map, 1, 1)
+    print(*swap_cities(road_map, 2, 2),sep="\n")
     print("-------------------swap-cities-yazdik------------------------------------------------------------------")
-    print(*shift_cities(road_map),sep="\n")
-    shift_cities(road_map)
-    print("-----------print-shift-cities--------------------------------------------------------------------------------------------------")
-    print_map(road_map)
-    print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
-    best_route_1 = find_best_cycle(road_map)
-    print(*best_route_1,sep="\n")
-    print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
-    Visualizer(best_route_1)
-    print("--------------------------------------------------------------------------------------------------------------------------------------")
+    #print(*shift_cities(road_map),sep="\n")
+    #shift_cities(road_map)
+    #print("-----------print-shift-cities--------------------------------------------------------------------------------------------------")
+    #print_map(road_map)
+    #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
+    #best_route_1 = find_best_cycle(road_map)
+    #print(*best_route_1,sep="\n")
+    #print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
+    #Visualizer(best_route_1)
+    #print("--------------------------------------------------------------------------------------------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
 
 if __name__ == "__main__": #keep this in
