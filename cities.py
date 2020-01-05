@@ -31,7 +31,7 @@ def compute_total_distance(road_map):
         city_y1 = float(road_map[i][3])
         city_x2 = float(road_map[(i + 1) % len(road_map)][2])
         city_y2 = float(road_map[(i + 1) % len(road_map)][3])
-        total_dist1 += sqrt(  ( (city_x2-city_x1)  ** 2)   + (    ( city_y2-city_y1 )  ** 2)   )
+        total_dist1 += sqrt( ( (city_x2-city_x1) ** 2)   + ( ( city_y2-city_y1 )  ** 2) )
     return (total_dist1)
 
 def swap_cities(road_map,index1,index2):
@@ -77,8 +77,7 @@ def print_map(road_map):
         new_city_y3 = float(road_map_last[i][3])
         new_city_x4 = float(road_map_last[(i + 1) % len(road_map_last)][2])
         new_city_y4 = float(road_map_last[(i + 1) % len(road_map_last)][3])
-        new_dist1 = sqrt((new_city_x3 - new_city_x4) ** 2 + (new_city_y3 - new_city_y4) ** 2)
-        #new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
+        new_dist1 = ((compute_total_distance([[str(),str(),new_city_x3,new_city_y3],[str(),str(),new_city_x4,new_city_y4]]))/2)
         total_dist += new_dist1
         new_line1 = " From City : " + road_map_last[i][1] + " ( " + " State : " +  road_map_last[i][0] \
                     + " ) to" +" City : "+ road_map_last[(i + 1) % len(road_map_last)][1] + " ( "  \
@@ -127,10 +126,10 @@ def Visualizer(road_map):
 
     for x in range(line_distance, canvas_width - line_distance, line_distance):
         visualize_1.create_text(x + line_distance, line_distance, text=round((Longtt_Range[int(x / line_distance)]), 2),
-                      angle=90, font=("Times", 8), fill='black')
+                      angle=90, font=("Lucida Console", 9), fill='black')
     for y in range(line_distance, canvas_height - line_distance, line_distance):
         visualize_1.create_text(line_distance, y + line_distance, text=round((Latt_Range[int(y / line_distance)]), 2),
-                      font=("Times", 8), fill='black')
+                      font=("Lucida Console", 9), fill='black')
 
     count = 0
     for i in best_route_2:
@@ -142,41 +141,24 @@ def Visualizer(road_map):
         my_color = "#" + "".join((choice(['0', '1', '2', '3', '4', '5', '6', '7', '8']) for _ in range(0, 9)))
         visualize_1.create_oval(inter_Longtt + 30, inter_Latt + 30, inter_Longtt + 50,
                                 inter_Latt + 50, fill=my_color, outline=my_color)
-        visualize_1.create_text(inter_Longtt + 40, inter_Latt + 40, text=str(count), font=("Times", 9), fill='white')
-        information_1=Label(text=(str(count),str(i[1]),str(i[0])),font=("Times", 8))
+        visualize_1.create_text(inter_Longtt + 40, inter_Latt + 40, text=str(count), font=("Lucida Console", 9), fill='white')
+        information_1=Label(text=(str(count),str(i[1]),str(i[0])),font=("Lucida Console", 9))
         information_1.pack(side=TOP)
 
     tkinter.mainloop()
 
 def main():
-    #file_name = input("Please type a file name that contains any data (for example type :city-data) :")
-    file_name = "city-data.txt"
-    #print("-------------------file-name-yazdik------------------------------------------------------------------")
-    #road_map= read_cities(("%s.txt" % (file_name)))
-    road_map = read_cities(file_name)
-    #print(*road_map,sep="\n")
-    #print("----------read-cities-(file_name)-yazdik--------------------------------------------------------------------------")
-    #print_cities(road_map)
-    #print("--------------print_cities(road_map)---fonksyionunu-cagirdik---------------------------------------------------------------------")
-    print(compute_total_distance(road_map))
-    #print("----------------print---compute_total_distance(road_map)------------------------------------------------------------------")
-    #index1 = int(len(road_map) * random.random())
-    #index2 = int(len(road_map) * random.random())
-    #print("-------------------index-1-2-yazdik-----------------------------------------------------------------")
-    #swap_cities(road_map, 1, 1)
-    print(*swap_cities(road_map, 2, 2),sep="\n")
-    print("-------------------swap-cities-yazdik------------------------------------------------------------------")
-    #print(*shift_cities(road_map),sep="\n")
-    #shift_cities(road_map)
-    #print("-----------print-shift-cities--------------------------------------------------------------------------------------------------")
-    #print_map(road_map)
-    #print("------------------print-road-map------------------------------------------------------------------------------------------------------------------")
-    #best_route_1 = find_best_cycle(road_map)
-    #print(*best_route_1,sep="\n")
-    #print("------------------print-best-cycle------------------------------------------------------------------------------------------------------------------")
-    #Visualizer(best_route_1)
-    #print("--------------------------------------------------------------------------------------------------------------------------------------")
-    print("-----------------------------------------------------------------------------------------------------------------------------------------------------")
+    file_name = input("Please type a file name that contains the data (for example type :city-data) :")
+    road_map= read_cities(("%s.txt" % (file_name)))
+    #road_map = read_cities("city-data.txt")
+    print_cities(road_map)
+    compute_total_distance(road_map)
+    index1,index2 = int(len(road_map) * random.random()),int(len(road_map) * random.random())
+    swap_cities(road_map, index1, index2)
+    shift_cities(road_map)
+    print_map(road_map)
+    best_route_1 = find_best_cycle(road_map)
+    Visualizer(best_route_1)
 
 if __name__ == "__main__": #keep this in
     main()
