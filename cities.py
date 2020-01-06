@@ -140,9 +140,9 @@ def Visualizer(road_map):
     count = 0
     for i in best_route_2:
         count += 1
-        differeance_Longtt = grid_distance / abs(Longtt_Range[2] - Longtt_Range[1])
+        differeance_Longtt = grid_distance / abs(Longtt_Range[-1] - Longtt_Range[-2])
         inter_Longtt = differeance_Longtt * ((float(i[3])) - math.floor(minumum_Longtt))
-        differeance_Latt = grid_distance / abs(Latt_Range[2] - Latt_Range[1])
+        differeance_Latt = grid_distance / abs(Latt_Range[-1] - Latt_Range[-2])
         inter_Latt = differeance_Latt * (math.ceil(maximum_Latt) - float(i[2]))
         my_color = "#" + "".join((choice(['0', '1', '2', '3', '4', '5', '6', '7', '8']) for _ in range(0, 9)))
         visualize_1.create_oval(inter_Longtt + 30, inter_Latt + 30, inter_Longtt + 50,
@@ -159,14 +159,15 @@ def main():
     road_map= read_cities(("%s.txt" % (file_name)))
     print_cities(road_map)
     compute_total_distance(road_map)
-    index1,index2 = int(len(road_map) * random.random()),int(len(road_map) * random.random())
+    index1 = int(len(road_map) * random.random())
+    index2 = int(len(road_map) * random.random())
     swap_cities(road_map, index1, index2)
     shift_cities(road_map)
     print_map(road_map)
     best_route_1 = find_best_cycle(road_map)
     Visualizer(best_route_1)
 
-if __name__ == "__main__": #keep this in
+if __name__ == "__main__":
     main()
 
 # ----- ----- ----- MSc Data Science - Ahmet Cem Saydam - 13173584 - 2019/2020  ----- ----- ----- #
