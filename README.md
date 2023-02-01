@@ -1,6 +1,6 @@
 # Traveling Salesman
 
-This coursework considers a simplified version of the travelling salesman problem.
+This work is a simplified version of the travelling salesman problem (also called the travelling salesperson problem or TSP).
 
 ## Purposes of this assignment
 
